@@ -6,8 +6,9 @@ import {
   OnInit,
   input,
 } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Form } from '@angular/forms';
-
+import { FormControl, FormGroup, FormBuilder, Form, Validators } from '@angular/forms';
+import { ValidatePhone } from '@app/validator/phoneno.validator';
+import { ValidatePostal } from '@app/validator/postal.validator';
 import { Vendor } from '../vendor';
 
 @Component({
@@ -43,14 +44,14 @@ export class VendorDetailComponent implements OnInit {
   email: FormControl;
 
   constructor(private builder: FormBuilder) {
-    this.address1 = new FormControl('');
-    this.city = new FormControl('');
-    this.province = new FormControl('');
-    this.postalcode = new FormControl('');
-    this.phone = new FormControl('');
-    this.type = new FormControl('');
-    this.name = new FormControl('');
-    this.email = new FormControl('');
+    this.address1 = new FormControl('', Validators.compose([Validators.required]));
+    this.city = new FormControl('', Validators.compose([Validators.required]));
+    this.province = new FormControl('', Validators.compose([Validators.required]));
+    this.postalcode = new FormControl('', Validators.compose([Validators.required, ValidatePostal]));
+    this.phone = new FormControl('', Validators.compose([Validators.required, ValidatePhone]));
+    this.type = new FormControl('', Validators.compose([Validators.required]));
+    this.name = new FormControl('', Validators.compose([Validators.required]));
+    this.email = new FormControl('', Validators.compose([Validators.required, Validators.email]));
 
     this.vendorForm = new FormGroup({
       address1: this.address1,

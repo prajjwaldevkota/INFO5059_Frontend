@@ -2,6 +2,12 @@
   <div layout="row">
     <mat-form-field>
       <mat-label>Vendor Name</mat-label>
+      <mat-error
+        *ngIf="name.errors && (name.dirty || name.touched)"
+        style="text-align: end"
+      >
+        Name is required
+      </mat-error>
       <input
         matInput
         type="text"
@@ -15,6 +21,15 @@
   <div layout="row">
     <mat-form-field>
       <mat-label>Email</mat-label>
+      <mat-error
+        *ngIf="email.errors && (email.dirty || email.touched)"
+        style="text-align: end"
+      >
+        <span *ngIf="email.hasError('required')">email is required.</span>
+        <span *ngIf="!email.hasError('required') && email.hasError('email')"
+          >needs format abc&#64;abc.com</span
+        >
+      </mat-error>
       <input
         matInput
         type="email"
@@ -28,6 +43,15 @@
   <div layout="row">
     <mat-form-field>
       <mat-label>Phone #</mat-label>
+      <mat-error
+        *ngIf="phone.errors && (phone.dirty || phone.touched)"
+        style="text-align: end"
+      >
+        <span *ngIf="phone.hasError('required')">phone is required.</span>
+        <span *ngIf="!phone.hasError('required') && phone.hasError('invalidPhone')"
+          >needs format (XXX)XXX-XXXX</span
+        >
+      </mat-error>
       <input
         matInput
         type="string"
@@ -41,6 +65,12 @@
   <div layout="row">
     <mat-form-field>
       <mat-label>Address</mat-label>
+      <mat-error
+        *ngIf="address1.errors && (address1.dirty || address1.touched)"
+        style="text-align: end"
+      >
+        Address is required
+      </mat-error>
       <input
         matInput
         type="text"
@@ -54,6 +84,12 @@
   <div layout="row">
     <mat-form-field>
       <mat-label>City</mat-label>
+      <mat-error
+        *ngIf="city.errors && (city.dirty || city.touched)"
+        style="text-align: end"
+      >
+        City is required
+      </mat-error>
       <input
         matInput
         type="text"
@@ -66,6 +102,12 @@
   </div>
   <div layout="row">
     <mat-form-field>
+      <mat-error
+        *ngIf="province.errors && (province.dirty || province.touched)"
+        style="text-align: end"
+      >
+        Province is required
+      </mat-error>
       <mat-select
         matInput
         placeholder="Province"
@@ -80,7 +122,22 @@
   </div>
   <div layout="row">
     <mat-form-field>
-      <mat-label>Postal</mat-label>
+      <mat-label>Postal</mat-label
+      ><mat-error
+        *ngIf="postalcode.errors && (postalcode.dirty || postalcode.touched)"
+        style="text-align: end"
+      >
+        <span *ngIf="postalcode.hasError('required')"
+          >postalcode is required.</span
+        >
+        <span
+          *ngIf="
+            !postalcode.hasError('required') &&
+            postalcode.hasError('invalidPostal')
+          "
+          >needs format X#X #X#</span
+        >
+      </mat-error>
       <input
         matInput
         type="string"
@@ -93,6 +150,12 @@
   </div>
   <div layout="row">
     <mat-form-field>
+      <mat-error
+        *ngIf="type.errors && (type.dirty || type.touched)"
+        style="text-align: end"
+      >
+        Type is required
+      </mat-error>
       <mat-select matInput placeholder="Rating" formControlName="type" flex>
         <mat-option value="Trusted">Trusted</mat-option>
         <mat-option value="Untrusted">Untrusted</mat-option>
@@ -101,7 +164,14 @@
   </div>
   <div class="mat-pad-sm">
     <span>
-      <button mat-raised-button type="submit">Save</button>
+      <button
+        mat-raised-button
+        type="button"
+        (click)="updateSelectedVendor()"
+        [disabled]="!vendorForm.valid"
+      >
+        Save
+      </button>
     </span>
     <span>
       <button

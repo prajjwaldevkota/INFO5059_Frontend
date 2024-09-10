@@ -1,23 +1,23 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 @import "./custom-theme.scss";
 .my-primary-text {
-color: mat.m2-get-color-from-palette($my-primary);
+  color: mat.m2-get-color-from-palette($my-primary);
 }
 .my-accent-text {
-color: mat.m2-get-color-from-palette($my-accent);
+  color: mat.m2-get-color-from-palette($my-accent);
 }
 
 .margin-right-2 {
-margin-top: 1vw !important;
-margin-right: 2vw !important;
-font-size: large;
-font-weight: bold;
+  margin-top: 1vw !important;
+  margin-right: 2vw !important;
+  font-size: large;
+  font-weight: bold;
 }
 .margin-top-5 {
-margin-top: 5vh !important;
+  margin-top: 5vh !important;
 }
 
-.align-right{
+.align-right {
   margin-top: 1vw !important;
   margin-right: 2vw !important;
   font-size: large;
@@ -25,34 +25,38 @@ margin-top: 5vh !important;
   margin-bottom: 1vw !important;
 }
 
-mat-list-item:nth-child(odd){
-  background-color:white;
-  }
-  mat-list-item:nth-child(even) {
-  background-color:#eeeeee;
-  }
+mat-list-item:nth-child(odd) {
+  background-color: white;
+}
+mat-list-item:nth-child(even) {
+  background-color: #eeeeee;
+}
 
-  .img {
-    /* Add your styles here */
-    text-align: center;
-    margin: 5px auto;
-  }
+.img {
+  /* Add your styles here */
+  text-align: center;
+  margin: 5px auto;
+}
 
-  .logo {
-    margin-top: -3vw;
-    width: 105px;
-    height: 105px;
-    margin-bottom: -2vw;
-  }
-
+.logo {
+  margin-top: -3vw;
+  width: 105px;
+  height: 105px;
+  margin-bottom: -2vw;
+}
 
 .padtop15 {
-    padding-top: 15vh;
+  padding-top: 15vh;
 }
 .material-icons.addicon {
-    font-size: 15vw;
-    position: absolute;
-    bottom: 5vh;
-    right: 5vw;
-    padding: 10vw;
+  font-size: 15vw;
+  position: absolute;
+  bottom: 5vh;
+  right: 5vw;
+  padding: 10vw;
+}
+
+mat-form-field {
+  margin-left: 5%;
+  width: 90%;
 }
