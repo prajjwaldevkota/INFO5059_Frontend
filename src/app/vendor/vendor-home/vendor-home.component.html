@@ -1,20 +1,19 @@
 <mat-card *ngIf="hideEditForm">
-  <mat-card-content *ngIf="vendors$ | async as ven; else loading">
+  <mat-card-content *ngIf="vendors.length > 0; else loading">
     <div class="img">
       <img src="assets/Logo.jpg" alt="Vendor" class="logo" />
     </div>
     <mat-card-header class="app-accent" layout="row"> </mat-card-header>
 
     <mat-list flex>
-      <app-vendor-list [vendors]="ven" (selected)="select($event)">
+      <app-vendor-list [vendors]="vendors" (selected)="select($event)">
       </app-vendor-list>
     </mat-list>
   </mat-card-content>
-  <mat-card-footer align="end" class="my-accent-text align-right">
-    {{ msg }}
-  </mat-card-footer>
+
   <ng-template #loading>Loading Vendors from server...</ng-template>
 </mat-card>
+
 <div class="pad5" *ngIf="hideEditForm">
   <mat-icon
     (click)="newVendor()"
@@ -41,7 +40,8 @@
     >
     </app-vendor-detail>
   </mat-card-content>
-  <mat-card-footer align="end" class="my-accent-text margin-right-2">
-    {{ msg }}
-  </mat-card-footer>
 </mat-card>
+
+<div class="my-accent-text align-right">
+  {{ msg }}
+</div>

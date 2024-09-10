@@ -48,7 +48,8 @@
         style="text-align: end"
       >
         <span *ngIf="phone.hasError('required')">phone is required.</span>
-        <span *ngIf="!phone.hasError('required') && phone.hasError('invalidPhone')"
+        <span
+          *ngIf="!phone.hasError('required') && phone.hasError('invalidPhone')"
           >needs format (XXX)XXX-XXXX</span
         >
       </mat-error>

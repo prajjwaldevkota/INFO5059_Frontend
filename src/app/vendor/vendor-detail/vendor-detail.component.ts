@@ -66,7 +66,6 @@ export class VendorDetailComponent implements OnInit {
   } //ctr
 
   ngOnInit(): void {
-    console.log(this.selectedVendor.postalcode);
     this.vendorForm.patchValue({
 
       address1: this.selectedVendor.address1,
