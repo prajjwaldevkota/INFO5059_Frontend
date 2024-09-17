@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-casestudy',
   templateUrl: './app.component.html',
 })
 export class AppComponent {
   title: string = '';
-  constructor(private router: Router) {
-    // if they refresh the page and setTitle doesn't run we'll grab the window path
-    this.title === ''
-      ? this.setTitle(
-          window.location.pathname.substring(1, window.location.pathname.length)
-        )
-      : null;
+  constructor(private location: Location) {
+    let path = location.path();
+    if (path && path.length > 1) {
+      let header = path.substring(1, 2).toUpperCase();
+      header += path.substring(2);
+      this.setTitle(header);
+    } else if (path === '') {
+      this.setTitle('');
+    }
   }
-  setTitle(title: string) {
-    this.title = title;
+  setTitle(header: string) {
+    this.title = header ? header : 'Home';
   }
 }
