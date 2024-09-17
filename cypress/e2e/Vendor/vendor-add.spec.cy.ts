@@ -1,12 +1,12 @@
 describe('Vendor add test', () => {
-  it('visits the Vendor page and adds an employee', () => {
+  it('visits the Vendor page and adds an vendor', () => {
     cy.visit('/');
     cy.get('button').click();
     cy.contains('a', 'vendor').click();
     cy.contains('control_point').click();
     cy.get('input[formcontrolname=name')
       .click({ force: true })
-      .type('Vendor Test');
+      .type('Test Vendor');
     cy.get('input[formcontrolname=phone')
       .click({ force: true })
       .type('(222)222-5555');
@@ -22,7 +22,7 @@ describe('Vendor add test', () => {
     cy.get('input[formcontrolname=email')
       .click({ force: true })
       .type('test@vendor.com');
-    cy.get('button').contains('Save').click();
+    cy.get('button').contains('Save').click({force: true});
     cy.contains('added!');
   });
 });
