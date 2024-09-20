@@ -2,44 +2,46 @@
   <div class="img">
     <img src="assets/Logo.jpg" alt="Vendor" class="logo" />
   </div>
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    matSort
-    (matSortChange)="sortProductWithObjectLiterals($event)"
-    matSortActive="id"
-    matSortDirection="asc"
-    matSortDisableClear
-    product-table
-    class="mat-elevation-z8"
-  >
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>
-        <div class="center-header">Product No.</div>
-      </th>
-      <td mat-cell *matCellDef="let product">{{ product.id }}</td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="productName">
-      <th mat-header-cell *matHeaderCellDef>
-        <div class="center-header">Name</div>
-      </th>
-      <td mat-cell *matCellDef="let product">{{ product.name }}</td>
-    </ng-container>
-    <!-- vendor Id Column -->
-    <ng-container matColumnDef="vendorId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <div class="center-header">Vendor</div>
-      </th>
-      <td mat-cell *matCellDef="let product">{{ product.vendorid }}</td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      (click)="select(row)"
-    ></tr>
-  </table>
+  <mat-card style="max-height: 500px; overflow: auto">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="sortProductWithObjectLiterals($event)"
+      matSortActive="id"
+      matSortDirection="asc"
+      matSortDisableClear
+      product-table
+      class="mat-elevation-z10"
+    >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="center-header">Product No.</div>
+        </th>
+        <td mat-cell *matCellDef="let product">{{ product.id }}</td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="productName">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="center-header">Name</div>
+        </th>
+        <td mat-cell *matCellDef="let product">{{ product.name }}</td>
+      </ng-container>
+      <!-- vendor Id Column -->
+      <ng-container matColumnDef="vendorId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <div class="center-header">Vendor</div>
+        </th>
+        <td mat-cell *matCellDef="let product">{{ product.vendorid }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="select(row)"
+      ></tr>
+    </table>
+  </mat-card>
   <div>
     <mat-icon
       (click)="newProduct()"
@@ -50,21 +52,21 @@
       control_point
     </mat-icon>
   </div>
-</div>
 
-<mat-card *ngIf="!hideEditForm">
-  <mat-card-content>
-    <app-product-detail
-      [selectedProduct]="productInterface"
-      [vendors]="vendors"
-      [products]="products"
-      (cancelled)="cancel('cancelled')"
-      (saved)="save($event)"
-      (deleted)="delete($event)"
-    ></app-product-detail>
-  </mat-card-content>
-</mat-card>
+  <mat-card *ngIf="!hideEditForm">
+    <mat-card-content>
+      <app-product-detail
+        [selectedProduct]="productInterface"
+        [vendors]="vendors"
+        [products]="products"
+        (cancelled)="cancel('cancelled')"
+        (saved)="save($event)"
+        (deleted)="delete($event)"
+      ></app-product-detail>
+    </mat-card-content>
+  </mat-card>
 
-<div class="my-accent-text align-right">
-  {{ msg }}
+  <div class="my-accent-text align-right">
+    {{ msg }}
+  </div>
 </div>

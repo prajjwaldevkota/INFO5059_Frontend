@@ -6,9 +6,9 @@
   </button>
 </mat-toolbar>
 <mat-menu #appMenu="matMenu">
-  <a mat-menu-item [routerLink]="['home']" (click)="setTitle('home')">home</a>
-  <a mat-menu-item [routerLink]="['vendor']" (click)="setTitle('vendor')"
-    >vendor</a>
-    <a mat-menu-item [routerLink]="['product']" (click)="setTitle('products')">Products</a>
+  <a mat-menu-item [routerLink]="['home']" (click)="setTitle('Home')">Home</a>
+  <a mat-menu-item [routerLink]="['vendor']" (click)="setTitle('Vendor')"
+    >Vendor</a>
+    <a mat-menu-item [routerLink]="['product']" (click)="setTitle('Product')">Product</a>
 </mat-menu>
 <router-outlet></router-outlet>
