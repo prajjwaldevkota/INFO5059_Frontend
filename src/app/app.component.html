@@ -8,7 +8,7 @@
 <mat-menu #appMenu="matMenu">
   <a mat-menu-item [routerLink]="['home']" (click)="setTitle('home')">home</a>
   <a mat-menu-item [routerLink]="['vendor']" (click)="setTitle('vendor')"
-    >vendor</a
-  >
+    >vendor</a>
+    <a mat-menu-item [routerLink]="['product']" (click)="setTitle('products')">Products</a>
 </mat-menu>
 <router-outlet></router-outlet>

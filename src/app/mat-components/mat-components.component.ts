@@ -10,6 +10,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatAccordion } from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatExpansionPanelTitle } from '@angular/material/expansion';
 import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldModule,
@@ -25,6 +30,11 @@ const MaterialComponents = [
   MatToolbarModule,
   MatSelectModule,
   MatTooltipModule,
+  MatSortModule,
+  MatTableModule,
+  MatAccordion,
+  MatExpansionModule,
+  MatExpansionPanelTitle,
 ];
 @NgModule({
   declarations: [],

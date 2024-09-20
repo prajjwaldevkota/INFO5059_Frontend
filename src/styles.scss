@@ -19,6 +19,7 @@
 
 .align-right {
   margin-top: 1vw !important;
+  margin-right: 5px;
   text-align: right;
   font-size: large;
   font-weight: bold;
@@ -59,4 +60,13 @@ mat-list-item:nth-child(even) {
 mat-form-field {
   margin-left: 5%;
   width: 90%;
+}
+
+.mat-mdc-row:nth-child(odd) {
+  background-color: #eeeeee;
+  text-align: center;
+}
+.mat-mdc-row.ng-star-inserted:nth-child(even) {
+  background-color: white;
+  text-align: center;
 }

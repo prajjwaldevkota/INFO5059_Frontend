@@ -45,6 +45,13 @@ export class GenericHttpService<T> {
       .pipe(take(1), catchError(this.handleError));
   }
 
+  productDelete(id: string): Observable<number> {
+    const urlWithId = `${BASEURL}/${this.entity}/${id}`;
+    return this.http
+      .delete<number>(urlWithId)
+      .pipe(take(1), catchError(this.handleError));
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
