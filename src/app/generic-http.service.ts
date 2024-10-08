@@ -52,6 +52,13 @@ export class GenericHttpService<T> {
       .pipe(take(1), catchError(this.handleError));
   }
 
+  getSome(id: number): Observable<T[]> {
+    const urlWithId = `${BASEURL}/${this.entity}/${id}`;
+    return this.http
+      .get<T[]>(urlWithId)
+      .pipe(take(1), catchError(this.handleError));
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
