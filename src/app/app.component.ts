@@ -7,13 +7,11 @@ import { Location } from '@angular/common';
 export class AppComponent {
   title: string = '';
   constructor(private location: Location) {
-    let path = this.location.path();
-    if (path && path.length > 1) {
-      let header = path.substring(1, 2).toUpperCase();
-      header += path.substring(2);
+    let header = '';
+    if (location.path() && location.path().length > 1) {
+      let header = location.path().substring(1, 2).toUpperCase()
+      header += location.path().substring(2);
       this.setTitle(header);
-    } else if (path === '') {
-      this.setTitle('');
     }
   }
   setTitle(header: string) {
