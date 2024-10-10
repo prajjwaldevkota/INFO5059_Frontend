@@ -9,10 +9,7 @@
       <div layout="row" style="margin-top: 3vh">
         <mat-form-field flex>
           <mat-label>Vendor</mat-label>
-          <mat-select
-            placeholder="Choose Vendor"
-            formControlName="vendorid"
-          >
+          <mat-select placeholder="Choose Vendor" formControlName="vendorid">
             <mat-option *ngFor="let vendor of vendors" [value]="vendor"
               >{{ vendor.name }}
             </mat-option>
@@ -40,10 +37,7 @@
       <div *ngIf="pickedProduct" layout="row">
         <mat-form-field flex>
           <mat-label>Quantity</mat-label>
-          <mat-select
-            placeholder="Choose Quantity"
-            formControlName="quantity"
-          >
+          <mat-select placeholder="Choose Quantity" formControlName="quantity">
             <mat-option *ngFor="let option of quantityOptions" [value]="option">
               {{ option }}
             </mat-option>
@@ -59,7 +53,7 @@
               class="pad-xs text-center md-subhead my-primary-text"
               style="font-weight: bold; padding: 2vh"
             >
-              Selected Products from  {{ selectedVendor.name }}
+              Selected Products from {{ selectedVendor.name }}
             </th>
           </tr>
           <tr style="font-weight: bold; background-color: #eeeeee">
@@ -95,43 +89,63 @@
             </td>
           </tr>
           <tr *ngFor="let item of items">
-            <td class="text-left" style="padding-top: 1vh; padding-bottom: 1vh">
+            <td
+              class="text-left"
+              style="padding-top: 1vh; padding-left: 1vh; padding-bottom: 1vh"
+            >
               {{ item.productid }}
             </td>
             <td
               width="700"
               class="text-left"
-              style="padding-top: 1vh; padding-bottom: 1vh; text-align: center;"
+              style="padding-top: 1vh; padding-bottom: 1vh; text-align: center"
             >
               {{ item.qty }}
             </td>
             <td
-              style="padding-top: 1vh; padding-bottom: 1vh; text-align: right"
+              style="
+                padding-top: 1vh;
+                padding-bottom: 1vh;
+                padding-right: 1vh;
+                text-align: right;
+              "
             >
-              {{ item.price * item.qty| currency : "USD" : "symbol" : "1.2-2" }}
+              {{
+                item.price * item.qty | currency : "USD" : "symbol" : "1.2-2"
+              }}
             </td>
           </tr>
           <tr>
-            <td colspan="2" style="text-align: right; margin-top: 1vh;">Sub:</td>
             <td
-              style="font-weight: 600; text-align: right"
+              colspan="2"
+              style="
+                text-align: right;
+                margin-top: 1vh;
+                background-color: #eeeeee;
+              "
             >
+              Sub:
+            </td>
+            <td style="font-weight: 600; text-align: right;background-color: #eeeeee">
               {{ sub | currency : "USD" : "symbol" : "1.2-2" }}
             </td>
           </tr>
           <tr>
             <td colspan="2" style="text-align: right">Tax:</td>
-            <td
-              style="font-weight: 600; text-align: right"
-            >
+            <td style="font-weight: 600; text-align: right">
               {{ total | currency : "USD" : "symbol" : "1.2-2" }}
             </td>
           </tr>
           <tr>
-            <td colspan="2" style="text-align: right">Total:</td>
+            <td
+              colspan="2"
+              style="text-align: right; background-color: #eeeeee"
+            >
+              Total:
+            </td>
             <td
               class="my-accent-text"
-              style="font-weight: 600; text-align: right"
+              style="font-weight: 600; text-align: right;background-color: #eeeeee"
             >
               {{ total | currency : "USD" : "symbol" : "1.2-2" }}
             </td>
@@ -143,7 +157,7 @@
           mat-raised-button
           color="primary"
           (click)="createPO()"
-          style="margin-top: 3vh; margin-bottom: 3vh;"
+          style="margin-top: 3vh; margin-bottom: 3vh"
         >
           Save PO
         </button>

@@ -124,7 +124,7 @@ export class GeneratorComponent implements OnInit, OnDestroy {
       error: (err: Error) =>
         (this.msg = `Couldn't get vendors - ${err.message}`),
       complete: () =>
-        passedMsg ? (this.msg = passedMsg) : (this.msg = `vendors loaded!`),
+        passedMsg ? (this.msg = passedMsg) : (this.msg = `Vendors loaded!`),
     });
   }
 
@@ -201,6 +201,7 @@ export class GeneratorComponent implements OnInit, OnDestroy {
         // Remove the item if quantity is 0
         this.items.splice(existingItemIndex, 1);
         this.selectedProducts = this.selectedProducts.filter(p => p.id !== product.id);
+        this.msg = `${product.name} removed!`;
       } else {
         // Update existing item
         this.items[existingItemIndex].qty = quantity;
@@ -216,9 +217,10 @@ export class GeneratorComponent implements OnInit, OnDestroy {
       };
       this.items.push(newItem);
       this.selectedProducts.push(product);
+      this.msg = `${quantity} ${product.name} added!`;
     }
     this.hasProduct = this.items.length > 0;
-    this.msg = `${quantity} ${product.name} added`;
+
   }
 
   calculateTotal(): void {
