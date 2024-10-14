@@ -7,6 +7,7 @@ import { PurchaseOrderLineItem } from '../purchase-order-line-item';
 import { Vendor } from '@app/vendor/vendor';
 import { NewVendorService } from '@app/vendor/newvendor.service';
 import { ProductService } from '@app/product/product.service';
+import { PDFURL} from '@app/constants';
 import { Product } from '@app/product/product';
 import {
   FormBuilder,
@@ -217,8 +218,9 @@ export class GeneratorComponent implements OnInit, OnDestroy {
       };
       this.items.push(newItem);
       this.selectedProducts.push(product);
-      this.msg = `${quantity} ${product.name} added!`;
+
     }
+    this.msg = `${quantity} ${product.name} added!`;
     this.hasProduct = this.items.length > 0;
 
   }
@@ -292,4 +294,7 @@ export class GeneratorComponent implements OnInit, OnDestroy {
     };
     this.vendorProducts = [];
   }
+  viewPdf(): void {
+    window.open(`${PDFURL}${this.POnumber}`, '');
+    } // viewPdf
 }
