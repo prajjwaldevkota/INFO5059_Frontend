@@ -185,9 +185,13 @@ export class GeneratorComponent implements OnInit, OnDestroy {
     const quantitySubscription = this.generatorForm
       .get('quantity')
       ?.valueChanges.subscribe((val) => {
+        //if the selected product is not null
         if (this.selectedProduct) {
+          //If the value is 'EOQ' then set the quantity to the EOQ value of the selected product else, set the quantity to the value selected
           const qty = val === 'EOQ' ? this.selectedProduct.eoq : val;
+          //call the Update function to update the quantity of the selected product
           this.updateOrAddItem(this.selectedProduct, qty);
+          //recalculate the total
           this.calculateTotal();
         }
       });
@@ -195,8 +199,10 @@ export class GeneratorComponent implements OnInit, OnDestroy {
 
   }
 
+  //Function to update the quantity of the selected product
   updateOrAddItem(product: Product, quantity: number): void {
     const existingItemIndex = this.items.findIndex(i => i.productid === product.id);
+    //if the product is already in the items array
     if (existingItemIndex > -1) {
       if (quantity === 0) {
         // Remove the item if quantity is 0
@@ -216,13 +222,13 @@ export class GeneratorComponent implements OnInit, OnDestroy {
         qty: quantity,
         price: product.costprice,
       };
+      //push the new item, specifically updated quantity, to the items array
       this.items.push(newItem);
       this.selectedProducts.push(product);
-
     }
+    //Update the message to show the product added
     this.msg = `${quantity} ${product.name} added!`;
     this.hasProduct = this.items.length > 0;
-
   }
 
   calculateTotal(): void {
@@ -258,10 +264,12 @@ export class GeneratorComponent implements OnInit, OnDestroy {
         this.pickedVendor = false;
         this.pickedProduct = false;
         this.generatedPO = true;
+        //Reset the Vendor Selection
         this.resetVendorSelection();
       },
     });
   }
+  //Clears the selected vendor and product
   resetVendorSelection(): void {
     this.vendorid.reset();
     this.productid.reset();
