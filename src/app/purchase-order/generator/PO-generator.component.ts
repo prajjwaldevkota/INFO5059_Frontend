@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-generator',
   standalone: true,
   imports: [CommonModule, MatComponentsModule, ReactiveFormsModule],
-  templateUrl: './generator.component.html',
+  templateUrl: './PO-generator.component.html',
   styles: ``,
 })
 export class GeneratorComponent implements OnInit, OnDestroy {
