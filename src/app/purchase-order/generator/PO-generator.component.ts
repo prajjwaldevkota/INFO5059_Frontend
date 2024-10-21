@@ -7,7 +7,7 @@ import { PurchaseOrderLineItem } from '../purchase-order-line-item';
 import { Vendor } from '@app/vendor/vendor';
 import { NewVendorService } from '@app/vendor/newvendor.service';
 import { ProductService } from '@app/product/product.service';
-import { PDFURL} from '@app/constants';
+import { PDFURL } from '@app/constants';
 import { Product } from '@app/product/product';
 import {
   FormBuilder,
@@ -50,7 +50,7 @@ export class GeneratorComponent implements OnInit, OnDestroy {
   POnumber: number = 0;
   readonly TAX_RATE: number = 0.13;
 
-  quantityOptions: (number | string)[] = ['EOQ',0, 1, 2, 3, 4, 5, 10, 15, 20];
+  quantityOptions: (number | string)[] = ['EOQ', 0, 1, 2, 3, 4, 5, 10, 15, 20];
 
   constructor(
     private builder: FormBuilder,
@@ -69,7 +69,7 @@ export class GeneratorComponent implements OnInit, OnDestroy {
     this.generatorForm = builder.group({
       vendorid: this.vendorid,
       productid: this.productid,
-      quantity: this.quantity
+      quantity: this.quantity,
     });
 
     this.selectedProduct = {
@@ -98,7 +98,7 @@ export class GeneratorComponent implements OnInit, OnDestroy {
     };
     this.hasProduct = false;
     this.sub = 0.0;
-    this. tax = 0.0;
+    this.tax = 0.0;
     this.total = 0.0;
   }
 
@@ -196,18 +196,21 @@ export class GeneratorComponent implements OnInit, OnDestroy {
         }
       });
     this.formSubscription?.add(quantitySubscription);
-
   }
 
   //Function to update the quantity of the selected product
   updateOrAddItem(product: Product, quantity: number): void {
-    const existingItemIndex = this.items.findIndex(i => i.productid === product.id);
+    const existingItemIndex = this.items.findIndex(
+      (i) => i.productid === product.id
+    );
     //if the product is already in the items array
     if (existingItemIndex > -1) {
       if (quantity === 0) {
         // Remove the item if quantity is 0
         this.items.splice(existingItemIndex, 1);
-        this.selectedProducts = this.selectedProducts.filter(p => p.id !== product.id);
+        this.selectedProducts = this.selectedProducts.filter(
+          (p) => p.id !== product.id
+        );
         this.msg = `${product.name} removed!`;
       } else {
         // Update existing item
@@ -233,14 +236,14 @@ export class GeneratorComponent implements OnInit, OnDestroy {
 
   calculateTotal(): void {
     this.sub = this.items.reduce((sum, item) => {
-      const product = this.selectedProducts.find(p => p.id === item.productid);
-      return sum + (item.qty * (product?.costprice || 0));
+      const product = this.selectedProducts.find(
+        (p) => p.id === item.productid
+      );
+      return sum + item.qty * (product?.costprice || 0);
     }, 0);
     this.tax = this.sub * this.TAX_RATE;
     this.total = this.sub + this.tax;
-
   }
-
 
   createPO(): void {
     this.generatedPO = false;
@@ -304,5 +307,5 @@ export class GeneratorComponent implements OnInit, OnDestroy {
   }
   viewPdf(): void {
     window.open(`${PDFURL}${this.POnumber}`, '');
-    } // viewPdf
+  } // viewPdf
 }
