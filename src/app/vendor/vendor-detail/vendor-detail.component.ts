@@ -6,8 +6,16 @@ import {
   OnInit,
   input,
 } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Form, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Form,
+  Validators,
+} from '@angular/forms';
 import { ValidatePhone } from '@app/validator/phoneno.validator';
+import { DeleteDialogComponent } from '@app/delete-dialog/delete-dialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ValidatePostal } from '@app/validator/postal.validator';
 import { Vendor } from '../vendor';
 
@@ -43,15 +51,30 @@ export class VendorDetailComponent implements OnInit {
   name: FormControl;
   email: FormControl;
 
-  constructor(private builder: FormBuilder) {
-    this.address1 = new FormControl('', Validators.compose([Validators.required]));
+  constructor(private builder: FormBuilder, private dialog: MatDialog) {
+    this.address1 = new FormControl(
+      '',
+      Validators.compose([Validators.required])
+    );
     this.city = new FormControl('', Validators.compose([Validators.required]));
-    this.province = new FormControl('', Validators.compose([Validators.required]));
-    this.postalcode = new FormControl('', Validators.compose([Validators.required, ValidatePostal]));
-    this.phone = new FormControl('', Validators.compose([Validators.required, ValidatePhone]));
+    this.province = new FormControl(
+      '',
+      Validators.compose([Validators.required])
+    );
+    this.postalcode = new FormControl(
+      '',
+      Validators.compose([Validators.required, ValidatePostal])
+    );
+    this.phone = new FormControl(
+      '',
+      Validators.compose([Validators.required, ValidatePhone])
+    );
     this.type = new FormControl('', Validators.compose([Validators.required]));
     this.name = new FormControl('', Validators.compose([Validators.required]));
-    this.email = new FormControl('', Validators.compose([Validators.required, Validators.email]));
+    this.email = new FormControl(
+      '',
+      Validators.compose([Validators.required, Validators.email])
+    );
 
     this.vendorForm = new FormGroup({
       address1: this.address1,
@@ -67,7 +90,6 @@ export class VendorDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.vendorForm.patchValue({
-
       address1: this.selectedVendor.address1,
       city: this.selectedVendor.city,
       province: this.selectedVendor.province,
@@ -92,5 +114,21 @@ export class VendorDetailComponent implements OnInit {
       email: this.vendorForm.value.email,
     };
     this.saved.emit(this.selectedVendor);
+  }
+  openDeleteDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = false;
+    dialogConfig.data = {
+      title: `Delete Vendor ${this.selectedVendor.name}`,
+      entityname: 'Vendor',
+    };
+    dialogConfig.panelClass = 'customdialog';
+    const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleted.emit(this.selectedVendor);
+      }
+    });
   }
 }

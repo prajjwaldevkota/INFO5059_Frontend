@@ -15,6 +15,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatExpansionPanelTitle } from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
 import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldModule,
@@ -35,6 +36,7 @@ const MaterialComponents = [
   MatAccordion,
   MatExpansionModule,
   MatExpansionPanelTitle,
+  MatDialogModule,
 ];
 @NgModule({
   declarations: [],

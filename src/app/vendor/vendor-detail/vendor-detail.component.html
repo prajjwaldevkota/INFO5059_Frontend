@@ -188,7 +188,7 @@
         *ngIf="selectedVendor.id"
         mat-raised-button
         type="button"
-        (click)="deleted.emit(selectedVendor)"
+        (click)="openDeleteDialog()"
       >
         Delete
       </button>

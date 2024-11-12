@@ -7,6 +7,8 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { DeleteDialogComponent } from '@app/delete-dialog/delete-dialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Product } from '@app/product/product';
 import { Vendor } from '@app/vendor/vendor';
 import { CommonModule } from '@angular/common';
@@ -51,7 +53,7 @@ export class ProductDetailComponent implements OnInit {
   qoh: FormControl;
   qoo: FormControl;
 
-  constructor(private builder: FormBuilder) {
+  constructor(private builder: FormBuilder, private dialog: MatDialog) {
     this.id = new FormControl(
       '',
       Validators.compose([
@@ -127,4 +129,20 @@ export class ProductDetailComponent implements OnInit {
     }
     return null;
   }
+  openDeleteDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = false;
+    dialogConfig.data = {
+    title: `Delete Product ${this.selectedProduct.name}`,
+    entityname: 'product'
+    };
+    dialogConfig.panelClass = 'customdialog';
+    const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+    this.deleted.emit(this.selectedProduct);
+    }
+    });
+    }
 }
