@@ -21,6 +21,7 @@ import { ValidateInt } from '@app/validator/intField.validator';
   templateUrl: './product-detail.component.html',
   styles: [],
 })
+
 export class ProductDetailComponent implements OnInit {
   //setter
   @Input() selectedProduct: Product = {
@@ -52,6 +53,7 @@ export class ProductDetailComponent implements OnInit {
   eoq: FormControl;
   qoh: FormControl;
   qoo: FormControl;
+  qrcodetxt: FormControl;
 
   constructor(private builder: FormBuilder, private dialog: MatDialog) {
     this.id = new FormControl(
@@ -71,10 +73,23 @@ export class ProductDetailComponent implements OnInit {
       Validators.compose([Validators.required])
     );
     this.msrp = new FormControl('', Validators.compose([Validators.required]));
-    this.rop = new FormControl('', Validators.compose([Validators.required, ValidateInt]));
-    this.eoq = new FormControl('', Validators.compose([Validators.required, ValidateInt]));
-    this.qoh = new FormControl('', Validators.compose([Validators.required, ValidateInt]));
-    this.qoo = new FormControl('', Validators.compose([Validators.required, ValidateInt]));
+    this.rop = new FormControl(
+      '',
+      Validators.compose([Validators.required, ValidateInt])
+    );
+    this.eoq = new FormControl(
+      '',
+      Validators.compose([Validators.required, ValidateInt])
+    );
+    this.qoh = new FormControl(
+      '',
+      Validators.compose([Validators.required, ValidateInt])
+    );
+    this.qoo = new FormControl(
+      '',
+      Validators.compose([Validators.required, ValidateInt])
+    );
+    this.qrcodetxt = new FormControl('', Validators.compose([Validators.required]));
 
     this.productForm = this.builder.group({
       id: this.id,
@@ -86,6 +101,7 @@ export class ProductDetailComponent implements OnInit {
       eoq: this.eoq,
       qoh: this.qoh,
       qoo: this.qoo,
+      qrcodetxt: this.qrcodetxt,
     });
   } //contructor
 
@@ -100,6 +116,7 @@ export class ProductDetailComponent implements OnInit {
       eoq: this.selectedProduct.eoq,
       qoh: this.selectedProduct.qoh,
       qoo: this.selectedProduct.qoo,
+      qrcodetxt: this.selectedProduct.qrcodetxt,
     });
   } //ngOnInit
 
@@ -113,6 +130,7 @@ export class ProductDetailComponent implements OnInit {
     this.selectedProduct.eoq = this.productForm.value.eoq;
     this.selectedProduct.qoh = this.productForm.value.qoh;
     this.selectedProduct.qoo = this.productForm.value.qoo;
+    this.selectedProduct.qrcodetxt = this.productForm.value.qrcodetxt;
 
     this.saved.emit(this.selectedProduct);
   }
@@ -134,15 +152,15 @@ export class ProductDetailComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = false;
     dialogConfig.data = {
-    title: `Delete Product ${this.selectedProduct.name}`,
-    entityname: 'product'
+      title: `Delete Product ${this.selectedProduct.name}`,
+      entityname: 'product',
     };
     dialogConfig.panelClass = 'customdialog';
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-    this.deleted.emit(this.selectedProduct);
-    }
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleted.emit(this.selectedProduct);
+      }
     });
-    }
+  }
 }
