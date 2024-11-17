@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatComponentsModule } from '@app/mat-components/mat-components.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,6 +11,7 @@ import { VendorModule } from '@app/vendor/vendor.module';
 import { NewVendorService } from '@app/vendor/newvendor.service';
 import { VendorDetailComponent } from '@app/vendor/vendor-detail/vendor-detail.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-product-home',
@@ -168,5 +169,11 @@ export class ProductHomeComponent implements OnInit {
         )),
     };
     literals[sort.active as keyof typeof literals]();
+  }
+  pageSize = 5;
+  @ViewChild(MatPaginator, { static: false }) set matPaginator(
+    paginator: MatPaginator
+  ) {
+    this.dataSource.paginator = paginator;
   }
 } //getHomeComponent

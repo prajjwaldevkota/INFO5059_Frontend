@@ -16,6 +16,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatExpansionPanelTitle } from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldModule,
@@ -37,6 +38,7 @@ const MaterialComponents = [
   MatExpansionModule,
   MatExpansionPanelTitle,
   MatDialogModule,
+  MatPaginatorModule,
 ];
 @NgModule({
   declarations: [],
