@@ -4,6 +4,7 @@ import { HomeComponent } from '@app/home/home.component';
 import { VendorHomeComponent } from '@app/vendor/vendor-home/vendor-home.component';
 import { ProductHomeComponent } from '@app/product/product-home/product-home.component';
 import { GeneratorComponent } from '@app/purchase-order/generator/PO-generator.component';
+import { POViewerComponent } from './purchase-order/poviewer/poviewer.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'CaseStudy - Home' },
@@ -22,6 +23,11 @@ const routes: Routes = [
     path: 'generator',
     component: GeneratorComponent,
     title: 'CaseStudy - Generator',
+  },
+  {
+    path: 'viewer',
+    component: POViewerComponent,
+    title: 'CaseStudy - POViewer',
   },
 ];
 @NgModule({

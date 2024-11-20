@@ -3,7 +3,7 @@
 export interface Product {
   id: string;
   vendorid: number;
-  name: String;
+  name: string;
   costprice: number;
   msrp:number;
   rop:number;

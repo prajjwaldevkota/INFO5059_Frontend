@@ -1,0 +1,174 @@
+<mat-card>
+  <mat-card-header layout="row">
+    <div class="img">
+      <img src="assets/Logo.jpg" alt="Vendor" class="logo" />
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="viewerForm" novalidate>
+      <div layout="row" style="margin-top: 3vh">
+        <mat-form-field flex>
+          <mat-label>Vendor</mat-label>
+          <mat-select placeholder="Choose Vendor" formControlName="vendorid">
+            <mat-option *ngFor="let vendor of vendors" [value]="vendor"
+              >{{ vendor.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="pickedVendor" layout="row">
+        <mat-form-field flex>
+          <mat-label>Product</mat-label>
+          <mat-select
+            placeholder="Choose PO"
+            formControlName="POid"
+            (change)="onPickPO()"
+          >
+            <mat-option *ngFor="let poreport of POReports" [value]="poreport">
+              {{ poreport.id }} -
+              {{ poreport.podate | date : "short" : "GMT-5" }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="pickedPO" class="row">
+        <table>
+          <tr>
+            <th
+              colspan="4"
+              class="pad-xs text-center md-subhead my-primary-text text-align-center"
+              style="font-weight: bold; padding: 2vh"
+            >
+              <div style="font-size: large">
+                Expense Report: {{ selectedPO?.id }}
+              </div>
+              <div style="font-size: small">
+                created {{ selectedPO?.podate | date : "short" : "GMT-5" }}
+              </div>
+            </th>
+          </tr>
+
+          <tr
+            style="font-weight: bold; background-color: #eeeeee"
+            class="pad-xs text-center md-subhead my-primary-text"
+          >
+            <td
+              style="
+                text-align: center;
+                width: 80vw;
+                padding-top: 2vh;
+                padding-bottom: 2vh;
+              "
+            >
+              Product
+            </td>
+            <td
+              style="
+                text-align: center;
+                width: 5vw;
+                padding-top: 2vh;
+                padding-bottom: 2vh;
+              "
+            >
+              Qty
+            </td>
+            <td
+              style="
+                text-align: center;
+                width: 5vw;
+                padding-top: 2vh;
+                padding-bottom: 2vh;
+              "
+            >
+              Cost
+            </td>
+            <td
+              style="
+                text-align: center;
+                width: 90vw;
+                padding-top: 2vh;
+                padding-bottom: 2vh;
+              "
+            >
+              Extended
+            </td>
+          </tr>
+          <tr *ngFor="let product of POProducts">
+            <td
+              class="text-left"
+              style="padding-top: 1vh; padding-left: 1vh; padding-bottom: 1vh"
+            >
+              {{ product.name }}
+            </td>
+            <td
+              width="700"
+              style="
+                padding-top: 1vh;
+                text-align: center;
+                padding-bottom: 1vh;
+                padding-left: 1vh;
+              "
+            >
+              {{ product.qty }}
+            </td>
+            <td
+              style="padding-top: 1vh; padding-bottom: 1vh; text-align: right"
+            >
+              {{ product.price | currency : "USD" : "symbol" : "1.2-2" }}
+            </td>
+            <td
+              style="
+                padding-top: 1vh;
+                padding-left: 1vh;
+                padding-bottom: 1vh;
+                text-align: right;
+              "
+            >
+              {{
+                product.price * product.qty
+                  | currency : "USD" : "symbol" : "1.2-2"
+              }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" style="text-align: right; margin-top: 1vh">Sub:</td>
+            <td style="font-weight: 600; text-align: right">
+              {{ total | currency : "USD" : "symbol" : "1.2-2" }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" style="text-align: right">Tax:</td>
+            <td style="font-weight: 600; text-align: right">
+              {{ 0.13 * total | currency : "USD" : "symbol" : "1.2-2" }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" style="text-align: right">Total:</td>
+            <td
+              class="my-accent-text"
+              style="font-weight: 600; text-align: right"
+            >
+              {{ total + 0.13 * total | currency : "USD" : "symbol" : "1.2-2" }}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div
+        style="text-align: center; margin-bottom: 2vh; margin-top: 3vh"
+        *ngIf="pickedPO"
+      >
+        <button
+          mat-raised-button
+          type="submit"
+          (click)="viewPDF(this.selectedPO?.id)"
+        >
+          View PO
+        </button>
+      </div>
+    </form>
+    <div class="my-accent-text align-right">
+      {{ msg }}
+    </div>
+  </mat-card-content>
+</mat-card>

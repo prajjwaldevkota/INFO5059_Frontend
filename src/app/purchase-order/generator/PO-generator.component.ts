@@ -131,6 +131,7 @@ export class GeneratorComponent implements OnInit, OnDestroy {
 
   loadVendorPO(): void {
     this.vendorProducts = [];
+    console.log(this.selectedVendor.id);
     this.productService.getSome(this.selectedVendor.id).subscribe({
       next: (products: Product[]) => {
         this.vendorProducts = products;
