@@ -18,7 +18,7 @@
       </div>
       <div *ngIf="pickedVendor" layout="row">
         <mat-form-field flex>
-          <mat-label>Product</mat-label>
+          <mat-label>Purchase Order</mat-label>
           <mat-select
             placeholder="Choose PO"
             formControlName="POid"
@@ -40,7 +40,7 @@
               style="font-weight: bold; padding: 2vh"
             >
               <div style="font-size: large">
-                Expense Report: {{ selectedPO?.id }}
+                Purchase Order Report: {{ selectedPO?.id }}
               </div>
               <div style="font-size: small">
                 created {{ selectedPO?.podate | date : "short" : "GMT-5" }}

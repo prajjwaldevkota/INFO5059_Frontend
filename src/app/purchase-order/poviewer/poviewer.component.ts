@@ -107,7 +107,6 @@ export class POViewerComponent implements OnInit, OnDestroy {
     this.purchaseOrderService.getSome(id).subscribe({
       next: (PO) => {
         this.POReports = PO;
-        console.log(PO);
       },
       error: (err) => {
         this.msg = 'Error loading reports';

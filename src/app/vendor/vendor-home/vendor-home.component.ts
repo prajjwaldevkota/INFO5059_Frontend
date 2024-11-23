@@ -31,6 +31,7 @@ export class VendorHomeComponent implements OnInit {
   ngOnInit(): void {
     this.getAll();
   } // ngOnInit
+
   select(ven: Vendor): void {
     this.todo = 'update';
     this.vendor = ven;
@@ -52,6 +53,7 @@ export class VendorHomeComponent implements OnInit {
       // Create observer object
       next: (ven: Vendor) => {
         this.msg = `Vendor ${ven.name} updated!`;
+        this.getAll();
       },
       error: (err: Error) => (this.msg = `Update failed! - ${err.message}`),
       complete: () => (this.hideEditForm = !this.hideEditForm),
@@ -88,8 +90,7 @@ export class VendorHomeComponent implements OnInit {
       next: (ven: Vendor) => {
         this.getAll(`Vendor ${ven.name} added!`);
       },
-      error: (err: Error) =>
-        (this.msg = `Vendor not added! - ${err.message}`),
+      error: (err: Error) => (this.msg = `Vendor not added! - ${err.message}`),
       complete: () => (this.hideEditForm = !this.hideEditForm), // this calls unsubscribe
     });
   } // add
